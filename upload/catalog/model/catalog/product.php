@@ -539,4 +539,18 @@ class ModelCatalogProduct extends Model {
 			return 0;
 		}
 	}
+
+	public function setProductViewed($product_id){
+		$cookieproducts = array();
+
+		if (isset($_COOKIE["cookieproducts"])) {
+			$cookieproducts = unserialize($_COOKIE['cookieproducts']);
+		}
+
+		array_push($cookieproducts, $product_id);
+		if ( sizeof($cookieproducts) > 5) {
+			array_shift($cookieproducts);
+		}
+		setcookie('cookieproducts', serialize($cookieproducts), time()+(60*60*24*30));
+	}
 }

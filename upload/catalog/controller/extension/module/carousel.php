@@ -3,9 +3,12 @@ class ControllerExtensionModuleCarousel extends Controller {
 	public function index($setting) {
 		static $module = 0;
 
+		$this->load->language('extension/module/carousel');
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 		
+		$this->load->model('catalog/product');
+
 		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
 		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
 		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.js');
@@ -23,7 +26,19 @@ class ControllerExtensionModuleCarousel extends Controller {
 				);
 			}
 		}
+		$data['cookieproducts'] = array();
 
+		$products = $this->model_design_banner->getProductsViewed();
+		foreach($products as $product){
+			$result = $this->model_catalog_product->getProduct($product);
+				$data['cookieproducts'][] = array(
+					'title'	=> $result['name'],
+					'link'	=>null,
+					'image'	=> $this->model_tool_image->resize($result['image'], $setting['width'], $setting['height'])
+				);
+		}
+
+		$data['module'] = $module++;
 		$data['module'] = $module++;
 
 		return $this->load->view('extension/module/carousel', $data);

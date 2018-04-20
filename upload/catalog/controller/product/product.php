@@ -158,6 +158,8 @@ class ControllerProductProduct extends Controller {
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
+		$this->model_catalog_product->setProductViewed($product_id);
+
 		if ($product_info) {
 			$url = '';
 
