@@ -4,9 +4,8 @@ class ControllerAccountCustomer extends Controller{
 
     public function index() {
 		$this->load->language('account/customer');
-		
+
 		$this->document->setTitle($this->language->get('heading_title'));
-		
 		$this->session->data['user_token'] = token(32);
 		$this->load->model('account/customer');
 
@@ -308,6 +307,6 @@ class ControllerAccountCustomer extends Controller{
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 
-		$this->response->setOutput($this->load->view('customer/customer_list', $data));
+		$this->response->setOutput($this->load->view('account/customer_list', $data));
 	}
 }
