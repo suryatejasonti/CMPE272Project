@@ -56,7 +56,7 @@ class ControllerCommonHeader extends Controller {
 		$data['account'] = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
 		$data['register'] = $this->url->link('account/register', 'language=' . $this->config->get('config_language'));
 		$data['login'] = $this->url->link('account/login', 'language=' . $this->config->get('config_language'));
-		$data['login'] = $this->url->link('account/customer', 'language=' . $this->config->get('config_language'));
+		$data['users'] = $this->url->link('account/customer', 'language=' . $this->config->get('config_language'));
 		$data['order'] = $this->url->link('account/order', 'language=' . $this->config->get('config_language'));
 		$data['transaction'] = $this->url->link('account/transaction', 'language=' . $this->config->get('config_language'));
 		$data['download'] = $this->url->link('account/download', 'language=' . $this->config->get('config_language'));
