@@ -5,10 +5,9 @@ class ControllerAccountCustomer extends Controller{
     public function index() {
 		$this->load->language('account/customer');
 		
-		$this->session->data['user_token'] = token(32);
-		
 		$this->document->setTitle($this->language->get('heading_title'));
-
+		
+		$this->session->data['user_token'] = token(32);
 		$this->load->model('account/customer');
 
 		$this->getList();
