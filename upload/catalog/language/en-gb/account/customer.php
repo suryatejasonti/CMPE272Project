@@ -5,6 +5,7 @@ $_['heading_title']         = 'Customers';
 // Text
 $_['text_success']          = 'Success: You have modified customers!';
 $_['text_list']             = 'Customer List';
+$_['text_curl_users']       = 'Customers from CURL';
 $_['text_add']              = 'Add Customer';
 $_['text_edit']             = 'Edit Customer';
 $_['text_default']          = 'Default';
