@@ -143,6 +143,17 @@ class ControllerAccountCustomer extends Controller{
 
 		$results = $this->model_account_customer->getCustomers($filter_data);
 
+		$customer_otheruri = $this->model_account_customer->getOtherURIUsers();
+		
+		$data['curl_customers'] = array();
+
+		foreach($customer_otheruri as $customer){
+			$data['curl_customers'][] = array(
+				'name'           => $customer[0],
+				'email'          => $customer[1],
+			);
+		}
+		
 		foreach ($results as $result) {
 			$login_info = $this->model_account_customer->getTotalLoginAttempts($result['email']);
 
