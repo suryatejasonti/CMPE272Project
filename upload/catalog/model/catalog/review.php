@@ -2,7 +2,7 @@
 class ModelCatalogReview extends Model {
 	public function addReview($product_id, $data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "review SET author = '" . $this->db->escape((string)$data['name']) . "', customer_id = '" . (int)$this->customer->getId() . "', product_id = '" . (int)$product_id . "', text = '" . $this->db->escape((string)$data['text']) . "', rating = '" . (int)$data['rating'] . "', date_added = NOW()");
-
+		sendReview($product_id, $data);
 		$review_id = $this->db->getLastId();
 
 		if (in_array('review', (array)$this->config->get('config_mail_alert'))) {
@@ -65,5 +65,18 @@ class ModelCatalogReview extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product p ON (r.product_id = p.product_id) LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) WHERE p.product_id = '" . (int)$product_id . "' AND p.date_available <= NOW() AND p.status = '1' AND r.status = '1' AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row['total'];
+	}
+
+	public function sendReview($product_id, $data){
+		$db = new mysqli("http://prajwalvenkatesh.com/", "prajwalv_app", "prajwal@93", "prajwalv_app");
+		if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+		}
+		$wid = 4;
+		$serviceName = 
+		$star = $data['rating'];
+		$comment = $data['text'];
+		$query = "INSERT INTO prod_review (`wid`,`pid`,`pname`,`star`,`comment`) VALUES('$wid','$product_id','$serviceName','$star','$comment')";
+		$res = $db->query($query);
 	}
 }
