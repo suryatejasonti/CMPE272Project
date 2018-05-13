@@ -551,10 +551,25 @@ class ModelCatalogProduct extends Model {
 			}
 		}
 		$cookieproducts[$product_id] = date_timestamp_get(date_create());
-		//array_push($cookieproducts, $product_id);
 		if ( sizeof($cookieproducts) > 5) {
 			array_shift($cookieproducts);
 		}
 		setcookie('cookieproducts', serialize($cookieproducts), time()+(60*60*24*30));
+
+		$cookieproducts = array();
+		$product_name = $this->getProduct($product_id);
+		if (isset($_COOKIE["cookiemarket"])) {
+			$cookieproducts = unserialize($_COOKIE['cookiemarket']);
+		}
+		foreach($cookieproducts as $key => $val){
+			if($key == $product_name['name']){
+				unset($cookieproducts[$key]);
+			}
+		}
+		$cookieproducts[$product_name] = date_timestamp_get(date_create());
+		if ( sizeof($cookieproducts) > 5) {
+			array_shift($cookieproducts);
+		}
+		setcookie('cookiemarket', serialize($cookieproducts), time()+(60*60*24*30));
 	}
 }

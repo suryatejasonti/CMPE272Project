@@ -2,8 +2,8 @@
 
     $cookieproducts = array();
 
-    if (isset($_COOKIE["cookieproducts"])) {
-        $cookieproducts = unserialize($_COOKIE['cookieproducts']);
+    if (isset($_COOKIE["cookiemarket"])) {
+        $cookieproducts = unserialize($_COOKIE['cookiemarket']);
     }
-    echo $cookieproducts;
+    echo json_encode($cookieproducts);
 ?>
