@@ -542,12 +542,16 @@ class ModelCatalogProduct extends Model {
 
 	public function setProductViewed($product_id){
 		$cookieproducts = array();
-
 		if (isset($_COOKIE["cookieproducts"])) {
 			$cookieproducts = unserialize($_COOKIE['cookieproducts']);
 		}
-
-		array_push($cookieproducts, $product_id);
+		foreach($cookieproducts as $key => $val){
+			if($key == $product_id){
+				unset($cookieproducts[$key]);
+			}
+		}
+		$cookieproducts[$product_id] = date_timestamp_get(date_create());
+		//array_push($cookieproducts, $product_id);
 		if ( sizeof($cookieproducts) > 5) {
 			array_shift($cookieproducts);
 		}

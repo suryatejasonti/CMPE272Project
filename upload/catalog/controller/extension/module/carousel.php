@@ -29,7 +29,7 @@ class ControllerExtensionModuleCarousel extends Controller {
 		$data['cookieproducts'] = array();
 
 		$products = $this->model_design_banner->getProductsViewed();
-		foreach($products as $product){
+		foreach($products as $product => $timestamp){
 			$result = $this->model_catalog_product->getProduct($product);
 				$data['cookieproducts'][] = array(
 					'title'	=> $result['name'],

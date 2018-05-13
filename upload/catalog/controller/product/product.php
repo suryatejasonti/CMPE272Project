@@ -596,7 +596,7 @@ class ControllerProductProduct extends Controller {
 				$this->load->model('catalog/review');
 
 				$this->model_catalog_review->addReview($this->request->get['product_id'], $this->request->post);
-
+				$this->model_catalog_review->sendReviewToMarket($this->request->get['product_id'], $this->request->post);
 				$json['success'] = $this->language->get('text_success');
 			}
 		}

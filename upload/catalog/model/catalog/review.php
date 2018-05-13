@@ -79,4 +79,21 @@ class ModelCatalogReview extends Model {
 		$query = "INSERT INTO prod_review (`wid`,`pid`,`pname`,`star`,`comment`) VALUES('$wid','$product_id','$serviceName','$star','$comment')";
 		$res = $db->query($query);
 	}
+
+	public function sendReviewToMarket($product_id, $data){
+
+		$product_info = $this->model_catalog_product->getProduct($product_id);
+		echo "coming......";
+		$conn = new mysqli("prajwalvenkatesh.com", "prajwalv_app", "prajwal@93", "prajwalv_app");
+		if ($conn->connect_error) {
+			echo "failed connection";
+		die("Connection failed: " . $conn->connect_error);
+		}
+		$wid = 4;
+		$star = $data['rating'];
+		$comment = $data['text'];
+		$product_name = $product_info['name'];
+		$query = "INSERT INTO prod_review (`wid`,`pid`,`pname`,`star`,`comment`) VALUES('$wid','$product_id','$product_name','$star','$comment')";
+		$res = $conn->query($query);
+	}
 }
