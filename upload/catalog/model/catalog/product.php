@@ -566,7 +566,7 @@ class ModelCatalogProduct extends Model {
 				unset($cookieproducts[$key]);
 			}
 		}
-		$cookieproducts[$product_name] = date_timestamp_get(date_create());
+		$cookieproducts[$product_name['name']] = date_timestamp_get(date_create());
 		if ( sizeof($cookieproducts) > 5) {
 			array_shift($cookieproducts);
 		}
